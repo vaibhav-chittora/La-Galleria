@@ -1,19 +1,21 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import ImageCard from './cards/Cards'
+import Card from './cards/Cards'
 import Navbar from './navbar/navbar'
+import Cards from './cards/Cards'
 
 function App() {
+  const [images, setImages] = useState([])
+
   useEffect(() => {
     async function fetchImages() {
       try {
-        const url = 'https://pixabay.com/api/?key=46184021-ab03fabc0d1c124ec59d8a3e9&q=yellow+flowers&image_type=photo&pretty=true'
+        const url = 'https://pixabay.com/api/?key=46184021-ab03fabc0d1c124ec59d8a3e9&q=coding+and+laptop&image_type=photo&pretty=true'
         const response = await fetch(url)
         const data = await response.json()
-        console.log(data);
-        // console.log("largeImageURL",data.hits[2].largeImageURL);
-        // console.log("previewURL ",data.hits[2].previewURL);
-        console.log("webformatURL ",data.hits[2].webformatURL);
+        console.log(data.hits);
+        setImages(data.hits)
+        console.log("webformatURL ", data.hits[2].webformatURL);
       } catch (error) {
         console.log(error);
       }
@@ -22,11 +24,16 @@ function App() {
     fetchImages()
   }, [])
 
+
   return (
     <>
-      {/* <h1 className='text-5xl text-center bg-green-200 p-5 font-bold'>La - Galleria</h1> */}
+      <h1 className='text-5xl text-center bg-green-200 p-5 font-bold'>La - Galleria</h1>
       <Navbar />
-      <ImageCard />
+      { <div className='grid grid-cols-2 md:grid-cols-4 gap-4 h-[100%] p-5'>
+        {images.map(image => (
+          <Cards image={image} />
+        ))}
+      </div>}
     </>
   )
 }
