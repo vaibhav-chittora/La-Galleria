@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'; // Import icons from react-icons
 
-const Navbar = () => {
+const Navbar = ({ handleSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Function to handle search button click
+  function handleSearchButton() {
+  handleSearch(searchQuery);
+  }
 
   // Function to clear the search bar
   const handleClearSearch = () => {
@@ -29,7 +34,7 @@ const Navbar = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search La Galleria"
+              placeholder="Search cats, dogs, cars, mountains, etc ...."
               className="w-full pl-10 pr-10 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
             />
             {searchQuery && (
@@ -44,11 +49,12 @@ const Navbar = () => {
 
           {/* Login & Signup Section */}
           <div className="flex space-x-4">
-            <button className="px-4 py-2 text-blue-500 font-semibold hover:bg-blue-100 rounded">
-              Login
-            </button>
-            <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
-              Signup
+            <button
+              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
+              type='submit'
+              onClick={handleSearchButton}
+            >
+              Search
             </button>
           </div>
         </div>
