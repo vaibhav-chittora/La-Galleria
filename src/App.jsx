@@ -5,12 +5,12 @@ import Cards from './cards/Cards'
 
 function App() {
   const [images, setImages] = useState([])
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('food+coldrink+mountains+cars+beach+cat')
 
   useEffect(() => {
     async function fetchImages() {
       try {
-        const url = `https://pixabay.com/api/?key=46184021-ab03fabc0d1c124ec59d8a3e9&q=${searchQuery}&image_type=photo&pretty=true`
+        const url = `https://pixabay.com/api/?key=46184021-ab03fabc0d1c124ec59d8a3e9&q=${searchQuery}&image_type=photo&pretty=true&per_page=200`
         const response = await fetch(url)
         const data = await response.json()
         // console.log(data.hits);

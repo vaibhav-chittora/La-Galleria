@@ -19,11 +19,11 @@ const Navbar = ({ handleSearch }) => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
-          <h1>
+          {/* <h1>
             <span className="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-3xl font-medium text-grey-900 ring-1 ring-inset ring-gray-500/10">
               La - Galleria
             </span>
-          </h1>
+          </h1> */}
 
           {/* Search Bar Section */}
           <div className="flex-1 mx-4 relative">

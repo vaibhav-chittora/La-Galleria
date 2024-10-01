@@ -1,40 +1,53 @@
 import React from 'react'
+import { AiOutlineEye, AiOutlineHeart, AiOutlineDownload } from 'react-icons/ai';
+
 
 function Cards({ image }) {
     const tags = image.tags.split(',', 2)
 
+    function clickImage() {
+        window.open(image.largeImageURL, '_blank')
+    }
+
     return (
-        <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg p-5 bg-gray-100 shadow-gray-400">
-            <img src={image.webformatURL} alt="" className="w-full rounded-xl" />
-            <div className="px-6 py-4 max-h-[50%]">
-                <div className="font-bold text-purple-500 text-xl mb-2">
-                    Photo by <a href={image.pageURL} className='underline'>{image.user}</a>
+        <div className="max-w-sm m-2 rounded-lg overflow-hidden shadow-xl cursor-pointer bg-gray-100 shadow-gray-400 group"
+            onClick={() => clickImage()}
+        >
+            <div className="relative">
+                <img
+                    src={image.webformatURL}
+                    alt=""
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    style={{
+                        aspectRatio: '1/1',
+                        objectFit: 'cover',
+                        maxHeight: '100%',
+                        maxWidth: '100%',
+                    }}
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
+                    <div className="font-bold text-white text-xl mb-2">
+                        Photo by {image.user}
+                    </div>
+                    <div>
+                        <div className="flex justify-between text-white mb-2">
+                            <span className="flex items-center"><AiOutlineEye className="mr-1" /> {image.views}</span>
+                            <span className="flex items-center"><AiOutlineHeart className="mr-1" /> {image.likes}</span>
+                            <span className="flex items-center"><AiOutlineDownload className="mr-1" /> {image.downloads}</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <a href={image.pageURL} className="text-white underline">View on Pixabay</a>
+                            <div>
+                                {tags.map((tag, index) => (
+                                    <span key={index} className='bg-[rgba(255,255,255,0.5)] text-dark mx-1 px-1 py-1 rounded-full text-sm inline-block'>#{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul>
-                    <li>
-                        <strong>Views: </strong>
-                        {image.views}
-                    </li>
-                    <li>
-                        <strong>Downloads: </strong>
-                        {image.downloads}
-                    </li>
-                    <li>
-                        <strong>Likes: </strong>
-                        {image.likes}
-                    </li>
-                </ul>
             </div>
-            <div>
-                {tags.map(tag => (
-                    <span className='bg-green-200 mx-2 p-2 rounded-3xl cursor-pointer'>#{tag}</span>
-                ))}
-            </div>
-
         </div>
-
-
-
     )
 }
 
